@@ -327,11 +327,8 @@
     <main class="hidden" id="main-content">
         <!-- TOP APP BAR -->
         <nav
-            class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md flex justify-between items-center px-container-padding py-4 w-full max-w-max-width mx-auto">
-            <span class="font-headline-md text-headline-md text-primary tracking-widest">S &amp; Z</span>
-            <div class="flex gap-4">
-                <span class="material-symbols-outlined text-primary">music_note</span>
-            </div>
+            class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md flex justify-center items-center px-container-padding py-4 max-w-max-width mx-auto transition-all duration-500">
+            <span id="top-header-name" class="font-headline-md text-headline-md text-primary tracking-widest transition-all duration-500">S &amp; Z</span>
         </nav>
         <!-- HERO SECTION -->
         <section id="hero-section"
@@ -757,6 +754,21 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
+                    
+                    // Update Top Header Name
+                    const topHeaderName = document.getElementById('top-header-name');
+                    if (topHeaderName) {
+                        if (id !== 'hero-section') {
+                            topHeaderName.innerHTML = 'Sarah Nadia &amp; Zuboiliadi';
+                            topHeaderName.classList.remove('font-headline-md', 'text-headline-md', 'tracking-widest');
+                            topHeaderName.classList.add('font-display-name-mobile', 'text-2xl');
+                        } else {
+                            topHeaderName.innerHTML = 'S &amp; Z';
+                            topHeaderName.classList.add('font-headline-md', 'text-headline-md', 'tracking-widest');
+                            topHeaderName.classList.remove('font-display-name-mobile', 'text-2xl');
+                        }
+                    }
+
                     navBtns.forEach(btn => {
                         if (btn.getAttribute('data-target') === id) {
                             btn.classList.add('bg-primary', 'dark:bg-primary-container', 'text-on-primary', 'dark:text-on-primary-container');
