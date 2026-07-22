@@ -14,7 +14,7 @@
     <meta property="og:type" content="website" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Amiri:ital,wght@0,400;0,700;1,400;1,700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -90,6 +90,8 @@
                         "container-padding": "24px"
                     },
                     "fontFamily": {
+                        "script": ["Great Vibes", "cursive"],
+                        "arabic": ["Amiri", "serif"],
                         "headline-md": ["Playfair Display"],
                         "body-lg": ["Montserrat"],
                         "display-name": ["Playfair Display"],
@@ -159,6 +161,44 @@
 
         #opening-screen {
             transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        @keyframes glowing-google {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .google-glow-wrapper {
+            position: relative;
+            display: inline-block;
+            border-radius: 9999px;
+        }
+
+        .google-glow-wrapper::before {
+            content: "";
+            background: linear-gradient(
+                45deg,
+                #4285f4, #ea4335, #fbbc05, #34a853,
+                #4285f4, #ea4335, #fbbc05, #34a853
+            );
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            background-size: 400%;
+            z-index: 0;
+            filter: blur(8px);
+            width: calc(100% + 8px);
+            height: calc(100% + 8px);
+            animation: glowing-google 20s linear infinite;
+            border-radius: inherit;
+            opacity: 0.85;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .google-glow-wrapper:hover::before {
+            opacity: 1;
+            filter: blur(12px);
         }
 
         .glass-card {
@@ -255,21 +295,13 @@
     <!-- OPENING SCREEN (COVER) -->
     <div class="fixed inset-0 z-[100] bg-surface flex flex-col items-center justify-center p-container-padding text-center"
         id="opening-screen">
-        <!-- PINTU ACEH CORNERS -->
-        <div
-            class="absolute inset-4 md:inset-8 border border-secondary/30 rounded-3xl pointer-events-none z-0 flex flex-col justify-between p-4 md:p-6 overflow-hidden">
-            <div class="flex justify-between w-full">
-                <span
-                    class="material-symbols-outlined text-secondary/40 text-5xl md:text-6xl rotate-[135deg]">architecture</span>
-                <span
-                    class="material-symbols-outlined text-secondary/40 text-5xl md:text-6xl rotate-[-135deg]">architecture</span>
-            </div>
-            <div class="flex justify-between w-full">
-                <span
-                    class="material-symbols-outlined text-secondary/40 text-5xl md:text-6xl rotate-45">architecture</span>
-                <span
-                    class="material-symbols-outlined text-secondary/40 text-5xl md:text-6xl rotate-[-45deg]">architecture</span>
-            </div>
+        <!-- FLOWER CORNERS -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <div class="absolute inset-4 md:inset-8 border border-secondary/30 rounded-3xl"></div>
+            <img src="bunga.png" alt="" class="absolute top-0 left-0 w-32 md:w-56 opacity-90 drop-shadow-sm -scale-y-100" />
+            <img src="bunga.png" alt="" class="absolute top-0 right-0 w-32 md:w-56 opacity-90 drop-shadow-sm -scale-100" />
+            <img src="bunga.png" alt="" class="absolute bottom-0 left-0 w-32 md:w-56 opacity-90 drop-shadow-sm" />
+            <img src="bunga.png" alt="" class="absolute bottom-0 right-0 w-32 md:w-56 opacity-90 drop-shadow-sm -scale-x-100" />
         </div>
 
         <!-- BUTTERFLIES -->
@@ -304,11 +336,11 @@
 
         <div class="absolute inset-0 opacity-5 pointer-events-none"
             style="background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');"></div>
-        <div class="mb-element-gap relative z-20">
-            <span class="material-symbols-outlined text-secondary text-6xl drop-shadow-sm"
-                style="font-variation-settings: 'FILL' 1;">architecture</span>
+        <div class="mb-6 relative z-20 flex flex-col items-center">
+            <h3 class="font-script text-6xl md:text-7xl text-primary mb-6 drop-shadow-sm" style="line-height: 1.2;">Walimatul Ursy</h3>
+            <img class="w-64 md:w-80 object-contain hover:scale-105 transition-transform duration-700 drop-shadow-xl" alt="Cover Foto" src="layardepan.png" />
         </div>
-        <h1 class="font-display-name-mobile text-display-name-mobile text-primary mb-4">Sarah Nadia &amp; Zuboiliadi
+        <h1 class="font-display-name-mobile text-display-name-mobile text-primary mb-4">Sarah Nadia &amp; Zuboiliadi, Lc
         </h1>
         <div
             class="p-6 border border-outline-variant/30 rounded-xl mb-10 w-full max-w-xs bg-surface-container-low shadow-sm">
@@ -316,12 +348,14 @@
                 Bapak/Ibu/Saudara/i</p>
             <h2 class="font-headline-md text-headline-md text-secondary" id="guest-name">Tamu Undangan</h2>
         </div>
-        <button
-            class="group flex items-center gap-2 bg-primary text-on-primary px-8 py-3 rounded-full font-label-sm text-label-sm uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-lg"
-            onclick="openInvitation()">
-            <span class="material-symbols-outlined">mail</span>
-            Buka Undangan
-        </button>
+        <div class="google-glow-wrapper transition-transform duration-300 hover:scale-105 active:scale-95 shadow-lg">
+            <button
+                class="relative z-10 group flex items-center gap-2 bg-primary text-on-primary px-8 py-3 rounded-full font-label-sm text-label-sm uppercase tracking-widest"
+                onclick="openInvitation()">
+                <span class="material-symbols-outlined">mail</span>
+                Buka Undangan
+            </button>
+        </div>
     </div>
     <!-- MAIN CONTENT -->
     <main class="hidden" id="main-content">
@@ -330,6 +364,65 @@
             class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md flex justify-center items-center px-container-padding py-4 max-w-max-width mx-auto transition-all duration-500">
             <span id="top-header-name" class="font-headline-md text-headline-md text-primary tracking-widest transition-all duration-500">S &amp; Z</span>
         </nav>
+        <!-- PROFILE SECTION -->
+        <section id="profile-section" class="py-section-gap pt-32 px-container-padding">
+            <div class="text-center mb-12">
+                <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Assalamualaikum Wr. Wb.
+                </h3>
+                <p class="text-on-surface-variant">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang
+                    Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-12 items-center justify-center max-w-4xl mx-auto">
+                <!-- Bride -->
+                <div class="flex flex-col items-center text-center group">
+                    <div
+                        class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-primary-container shadow-md group-hover:scale-105 transition-transform">
+                        <img class="w-full h-full object-cover" data-alt="Sarah Nadia" src="wanita.png" />
+                    </div>
+                    <h4 class="font-display-name text-4xl text-primary mb-0">Sarah</h4>
+                    <h5 class="font-headline-md text-lg text-primary mb-3">Sarah Nadia</h5>
+                    <p class="text-on-surface-variant text-sm mb-2">Putri Kedua dari:</p>
+                    <div class="font-body-md text-body-md font-semibold space-y-1">
+                        <p>Bapak Aiyub Idris</p>
+                        <p class="text-sm font-normal italic text-on-surface-variant">Dan</p>
+                        <p>Ibu Aminah</p>
+                    </div>
+                </div>
+                <div class="font-display-name text-secondary opacity-30 text-6xl">&amp;</div>
+                <!-- Groom -->
+                <div class="flex flex-col items-center text-center group">
+                    <div
+                        class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-primary-container shadow-md group-hover:scale-105 transition-transform">
+                        <img class="w-full h-full object-cover" data-alt="Zuboiliadi" src="lakilaki.png" />
+                    </div>
+                    <h4 class="font-display-name text-4xl text-primary mb-0">Zubaili</h4>
+                    <h5 class="font-headline-md text-lg text-primary mb-3">Zuboiliadi</h5>
+                    <p class="text-on-surface-variant text-sm mb-2">Putra Pertama dari:</p>
+                    <div class="font-body-md text-body-md font-semibold space-y-1">
+                        <p>Bapak Mahyeddin (Alm)</p>
+                        <p class="text-sm font-normal italic text-on-surface-variant">Dan</p>
+                        <p>Ibu Nurhayati</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOA PENGANTIN SECTION -->
+        <section class="pb-section-gap px-container-padding">
+            <div class="max-w-xl mx-auto bg-[#2c2b27] border-[3px] border-[#b89b58] rounded-[2rem] p-8 md:p-12 text-center shadow-2xl">
+                <h3 class="font-display-name text-4xl md:text-5xl text-white italic mb-10">Doa Pengantin</h3>
+                <p class="font-arabic text-xl sm:text-2xl md:text-3xl text-white mb-8" dir="rtl">
+                    بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
+                </p>
+                <p class="font-body-md text-white/90 leading-relaxed mb-6">
+                    "Semoga Allah memberkahimu dan memberkahi apa yang menjadi tanggung jawabmu, serta menyatukan kalian berdua dalam kebaikan."
+                </p>
+                <p class="font-body-md text-white font-bold tracking-wide">
+                    (HR. Abu Dawud no. 2130)
+                </p>
+            </div>
+        </section>
+
         <!-- HERO SECTION -->
         <section id="hero-section"
             class="min-h-screen flex flex-col items-center justify-center pt-24 px-container-padding text-center relative">
@@ -390,53 +483,23 @@
             </div>
         </section>
         <!-- QUOTE SECTION -->
-        <section class="py-section-gap px-container-padding bg-surface-container-lowest text-center">
-            <div class="max-w-md mx-auto fade-in">
-                <div class="pinto-aceh-divider mb-8">
-                    <span class="material-symbols-outlined motif-icon">architecture</span>
-                </div>
-                <p class="font-headline-md text-headline-md text-primary italic mb-6">"Dan di antara tanda-tanda
+        <section class="relative py-section-gap px-container-padding text-center overflow-hidden bg-surface">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-50">
+                <source src="animebg.mp4" type="video/mp4" />
+            </video>
+            <div class="absolute inset-0 bg-surface-container-lowest/60 z-0 backdrop-blur-[2px]"></div>
+            
+            <div class="relative z-10 max-w-md mx-auto fade-in">
+
+                <p class="font-headline-md text-headline-md text-primary italic mb-6 drop-shadow-sm">"Dan di antara tanda-tanda
                     kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu
                     cenderung dan merasa tenteram kepadanya..."</p>
-                <p class="font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-widest">(Q.S
+                <p class="font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-widest drop-shadow-sm">(Q.S
                     Ar-Rum: 21)</p>
-                <div class="pinto-aceh-divider mt-8">
-                    <span class="material-symbols-outlined motif-icon">architecture</span>
-                </div>
+
             </div>
         </section>
-        <!-- PROFILE SECTION -->
-        <section class="py-section-gap px-container-padding">
-            <div class="text-center mb-12">
-                <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Assalamualaikum Wr. Wb.
-                </h3>
-                <p class="text-on-surface-variant">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang
-                    Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:</p>
-            </div>
-            <div class="flex flex-col md:flex-row gap-12 items-center justify-center max-w-4xl mx-auto">
-                <!-- Bride -->
-                <div class="flex flex-col items-center text-center group">
-                    <div
-                        class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-primary-container shadow-md group-hover:scale-105 transition-transform">
-                        <img class="w-full h-full object-cover" data-alt="Sarah Nadia" src="wanita.png" />
-                    </div>
-                    <h4 class="font-headline-md text-headline-md text-primary mb-1">Sarah Nadia</h4>
-                    <p class="text-on-surface-variant text-sm mb-2">Putri dari:</p>
-                    <p class="font-body-md text-body-md font-semibold">Aiyub Idris &amp; Aminah Razali</p>
-                </div>
-                <div class="font-display-name text-secondary opacity-30 text-6xl">&amp;</div>
-                <!-- Groom -->
-                <div class="flex flex-col items-center text-center group">
-                    <div
-                        class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-primary-container shadow-md group-hover:scale-105 transition-transform">
-                        <img class="w-full h-full object-cover" data-alt="Zuboiliadi" src="lakilaki.png" />
-                    </div>
-                    <h4 class="font-headline-md text-headline-md text-primary mb-1">Zuboiliadi</h4>
-                    <p class="text-on-surface-variant text-sm mb-2">Putra dari:</p>
-                    <p class="font-body-md text-body-md font-semibold">Mahyeddin (Alm) &amp; Nurhayati</p>
-                </div>
-            </div>
-        </section>
+
         <!-- EVENT SECTION -->
         <section id="event-section" class="py-section-gap px-container-padding">
             <div class="max-w-2xl mx-auto glass-card p-8 rounded-3xl text-center relative">
@@ -577,9 +640,7 @@
         </section>
         <!-- CLOSING SECTION -->
         <section class="py-section-gap px-container-padding text-center">
-            <div class="pinto-aceh-divider mb-8">
-                <span class="material-symbols-outlined motif-icon">architecture</span>
-            </div>
+
             <p class="text-on-surface-variant mb-6">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i
                 berkenan hadir untuk memberikan doa restu kepada kami.</p>
             <h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-4">Wassalamualaikum Wr. Wb.</h3>
@@ -590,9 +651,7 @@
         <!-- FOOTER -->
         <footer
             class="w-full py-section-gap flex flex-col items-center gap-element-gap text-center px-container-padding border-t border-outline-variant/30 bg-surface">
-            <div class="pinto-aceh-divider scale-75 opacity-50 mb-4">
-                <span class="material-symbols-outlined motif-icon">architecture</span>
-            </div>
+
             <p class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">S &amp; Z Wedding Invitation
             </p>
 
